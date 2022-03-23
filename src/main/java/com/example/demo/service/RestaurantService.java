@@ -32,14 +32,87 @@ public class RestaurantService {
 			RestaurantEntity restaurantEntity = new RestaurantEntity();
 			Row row = sheet.getRow(rowNum);
 			for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
-				String restuarantCode = String.valueOf(row.getCell(0).getNumericCellValue()) ;
-				String restuarantName = row.getCell(1).getStringCellValue();
-				String restuarantCity = row.getCell(3).getStringCellValue();
-				String restuarantAddress = row.getCell(4).getStringCellValue();
-				restaurantEntity.setRestuarantCode(restuarantCode);
-				restaurantEntity.setRestaurantName(restuarantName);
-				restaurantEntity.setCity(restuarantCity);
-				restaurantEntity.setAddress(restuarantAddress);
+				Cell cell = row.getCell(0);
+		       String cellValue = null;
+		        switch ( cell.getCellType()) {
+				 case STRING:
+		                cellValue = cell.getStringCellValue();
+		                break;
+		            case NUMERIC:
+		                String[] values = String.valueOf(cell.getNumericCellValue()).split("\\.");
+		                if (values != null && values.length > 0) {
+		                    cellValue = values[0];
+		                } else {
+		                    cellValue = String.valueOf(cell.getNumericCellValue());
+		                }
+		                break;
+		            case BOOLEAN:
+		                cellValue = String.valueOf(cell.getBooleanCellValue());
+		                break;
+		            default:
+		        }
+		        String cellValue1 = null;
+		        Cell cell1 = row.getCell(1);
+		        switch ( cell1.getCellType()) {
+				 case STRING:
+		                cellValue1 = cell1.getStringCellValue();
+		                break;
+		            case NUMERIC:
+		                String[] values = String.valueOf(cell1.getNumericCellValue()).split("\\.");
+		                if (values != null && values.length > 0) {
+		                    cellValue1 = values[0];
+		                } else {
+		                    cellValue1 = String.valueOf(cell1.getNumericCellValue());
+		                }
+		                break;
+		            case BOOLEAN:
+		                cellValue1 = String.valueOf(cell1.getBooleanCellValue());
+		                break;
+		            default:
+		        }
+		        String cellValue2 = null;
+		        Cell cell11 = row.getCell(3);
+		        switch ( cell11.getCellType()) {
+				 case STRING:
+		                cellValue2 = cell11.getStringCellValue();
+		                break;
+		            case NUMERIC:
+		                String[] values = String.valueOf(cell11.getNumericCellValue()).split("\\.");
+		                if (values != null && values.length > 0) {
+		                    cellValue2 = values[0];
+		                } else {
+		                    cellValue2 = String.valueOf(cell11.getNumericCellValue());
+		                }
+		                break;
+		            case BOOLEAN:
+		                cellValue2 = String.valueOf(cell11.getBooleanCellValue());
+		                break;
+		            default:
+		        }
+		        String cellValue3 = null;
+		        Cell cell111 = row.getCell(4);
+		        switch ( cell111.getCellType()) {
+				 case STRING:
+		                cellValue3 = cell111.getStringCellValue();
+		                break;
+		            case NUMERIC:
+		                String[] values = String.valueOf(cell111.getNumericCellValue()).split("\\.");
+		                if (values != null && values.length > 0) {
+		                    cellValue3 = values[0];
+		                } else {
+		                    cellValue3 = String.valueOf(cell111.getNumericCellValue());
+		                }
+		                break;
+		            case BOOLEAN:
+		                cellValue3 = String.valueOf(cell111.getBooleanCellValue());
+		                break;
+		            default:
+		        }
+		
+				restaurantEntity.setRestuarantCode(cellValue);
+				restaurantEntity.setRestaurantName(cellValue1);
+				restaurantEntity.setCity(cellValue2);
+				restaurantEntity.setAddress(cellValue3);
 			}
 			restaurantEntities.add(restaurantEntity);
 		}
